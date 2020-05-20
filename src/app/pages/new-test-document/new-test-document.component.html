@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-12">
+        <h5 class="m-0 font-weight-bold">{{ title }}</h5>
+    </div>
+</div>
+<hr class="my-1" />
+<div class="row my-3">
+    <div class="col-4">
+        <div class="form-group">
+            <label for="applicationSelect">Aplicativo:</label>
+            <select class="form-control" id="applicationSelect">
+        <option>Citypaq</option>
+        <option>Duapost</option>
+        <option>Gnomo</option>
+      </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="associateDocument">Documento asociado:</label>
+            <input type="email" class="form-control" id="associateDocumentInput" />
+        </div>
+    </div>
+    <div class="col-2 d-flex flex-row-reverse align-items-end">
+        <button type="button" class="btn bg-correos text-light mb-3" data-toggle="modal" data-target="#testCaseModal" (click)="clearTestCaseForm()">
+            <i class="fa fa-plus mr-2" aria-hidden="true"></i> Caso de prueba
+        </button>
+    </div>
+</div>
+<div class="row my-2">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Precondiciones</th>
+                    <th scope="col" class="text-center">Status</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let testCase of testDocument.testCases">
+                    <td scope="col" class="text-center">{{ testCase.testNumber }}</td>
+                    <td scope="col">{{ testCase.testName }}</td>
+                    <td scope="col">{{ testCase.testDescription }}</td>
+                    <td scope="col">{{ testCase.testPrecondition }}</td>
+                    <td scope="col" class="text-center">{{ testCase.testStatus }}</td>
+                    <td>
+                        <i class="fa fa-pencil mx-1" aria-hidden="true" (click)="editTestCase(testCase)" data-toggle="modal" data-target="#testCaseModal"></i>
+                        <i class="fa fa-trash mx-1" aria-hidden="true" (click)="deleteTestCase(testCase)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal add test case -->
+<div class="modal fade" id="testCaseModal" tabindex="-1" role="dialog" aria-labelledby="testCaseModalLabel " aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="testCaseModalLabel">
+                    Nuevo caso de prueba
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+            </div>
+            <div class="modal-body">
+                <app-test-case-form></app-test-case-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-correos text-white" (click)="addTestCase()">
+          {{ testCaseModalButton }}
+        </button>
+            </div>
+        </div>
+    </div>
+</div>
